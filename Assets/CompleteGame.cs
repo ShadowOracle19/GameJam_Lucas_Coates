@@ -6,6 +6,8 @@ public class CompleteGame : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("Main Menu");
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        SceneManager.LoadScene("EndCutscene");
     }
 }
