@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1508703019}
   - component: {fileID: 1508703018}
   m_Layer: 3
-  m_Name: Icosphere
+  m_Name: MushroomHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2443,9 +2443,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2
-  m_Height: 1.8
+  m_Height: 1.8933198
   m_Direction: 1
-  m_Center: {x: 0, y: 0.97358835, z: 0}
+  m_Center: {x: 0, y: 0.9269284, z: 0}
 --- !u!114 &4327925340769936569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2458,6 +2458,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c426155ae8fec974fb006f0f716a77d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteracting: 0
+  currentSpore: 0
+  mushroomHat: {fileID: 1508703016}
+  water: []
 --- !u!114 &4327925340769936570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2470,8 +2474,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d91b06167c362408145d2c37d0efd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 7
+  inAirTimer: 0
+  leapingVelocity: 3
+  fallingVelocity: 33
+  raycastHeightOffSet: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  isSprinting: 0
+  isGrounded: 1
+  isJumping: 0
+  walkingSpeed: 1.5
+  runningSpeed: 7
+  sprintingSpeed: 7
   rotationSpeed: 15
+  jumpHeight: 5
+  gravityIntensity: -40
 --- !u!114 &4327925340769936573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2488,8 +2506,11 @@ MonoBehaviour:
   cameraInput: {x: 0, y: 0}
   cameraInputX: 0
   cameraInputY: 0
+  moveAmount: 0
   verticalInput: 0
   horizontalInput: 0
+  b_Input: 0
+  Jump_Input: 0
 --- !u!114 &4327925340769936574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2502,6 +2523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4f29f13b1c40a4b9e4c054184cda24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &5411903092334281150
 GameObject:
   m_ObjectHideFlags: 0
