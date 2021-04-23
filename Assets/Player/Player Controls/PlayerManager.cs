@@ -16,12 +16,11 @@ public class PlayerManager : MonoBehaviour
     [Header("Spore functions")]
     public Spores currentSpore;
     public GameObject mushroomHat;
-    public water[] water;
+    public GameObject shield;
 
     private void Awake()
     {
         currentSpore = Spores.None;
-        water = FindObjectsOfType<water>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         animator = GetComponent<Animator>();
@@ -69,15 +68,25 @@ public class PlayerManager : MonoBehaviour
         switch (currentSpore)
         {
             case Spores.None:
-                mushroomHat.GetComponent<MeshRenderer>().material.color = Color.Lerp(mushroomHat.GetComponent<MeshRenderer>().material.color, Color.red, 0.01f);
-                
+                shield.gameObject.SetActive(false);
+                mushroomHat.GetComponent<MeshRenderer>().material.color = Color.Lerp(mushroomHat.GetComponent<MeshRenderer>().material.color, Color.red, 0.01f);               
                 break;
+
             case Spores.Water:
+                shield.gameObject.SetActive(false);
                 mushroomHat.GetComponent<MeshRenderer>().material.color = Color.Lerp(mushroomHat.GetComponent<MeshRenderer>().material.color, Color.blue, 0.01f);
                 break;
+
             case Spores.Toxic:
+                shield.gameObject.SetActive(false);
                 mushroomHat.GetComponent<MeshRenderer>().material.color = Color.Lerp(mushroomHat.GetComponent<MeshRenderer>().material.color, Color.black, 0.01f);
                 break;
+
+            case Spores.Shielding:
+                mushroomHat.GetComponent<MeshRenderer>().material.color = Color.Lerp(mushroomHat.GetComponent<MeshRenderer>().material.color, Color.yellow, 0.01f);
+                shield.gameObject.SetActive(true);
+                break;
+
             default:
                 break;
         }
@@ -101,5 +110,6 @@ public enum Spores
 {
     None,
     Water,
-    Toxic
+    Toxic,
+    Shielding
 }

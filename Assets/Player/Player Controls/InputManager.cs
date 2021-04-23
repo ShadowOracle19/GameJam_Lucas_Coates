@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
-        //HandleJumpInput();
+        HandleJumpInput();
     }
 
     private void HandleMovementInput()

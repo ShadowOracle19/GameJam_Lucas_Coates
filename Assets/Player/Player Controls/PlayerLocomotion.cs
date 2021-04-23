@@ -54,15 +54,26 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (isJumping) return;
+        
 
         moveDirection = cameraObject.forward * inputManager.verticalInput;
         moveDirection = moveDirection + cameraObject.right * inputManager.horizontalInput;
         moveDirection.Normalize();
 
+        if (isJumping)
+        {
+            //float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+            //Vector3 playerVelocity = moveDirection;
+            //playerVelocity.y = jumpingVelocity;
+            //playerRigidbody.velocity = playerVelocity;
+            moveDirection.y = 0;
+            moveDirection.y = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+        }
+        else
+        {
+            moveDirection.y = 0;
+        }
         
-
-        moveDirection.y = 0;
 
         if(isSprinting)
         {
@@ -86,7 +97,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleRotation()
     {
-        if (isJumping) return;
+        //if (isJumping) return;
 
         Vector3 targetDirection = Vector3.zero;
         targetDirection = cameraObject.forward * inputManager.verticalInput;
@@ -143,10 +154,6 @@ public class PlayerLocomotion : MonoBehaviour
             animatorManager.animator.SetBool("isJumping", true);
             animatorManager.PlayTargetAnimation("Jump", false);
 
-            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-            Vector3 playerVelocity = moveDirection;
-            playerVelocity.y = jumpingVelocity;
-            playerRigidbody.velocity = playerVelocity;
         }
     }
 
