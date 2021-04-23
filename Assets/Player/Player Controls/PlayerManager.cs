@@ -18,6 +18,15 @@ public class PlayerManager : MonoBehaviour
     public GameObject mushroomHat;
     public GameObject shield;
 
+    [Header("Respawn")]
+    public Transform respawnPoint;
+    public GameObject player;
+
+    [Header("Pause")]
+    public GameObject pauseWindow;
+    [Header("Audio")]
+    public AudioSource sporeChangeSound;
+
     private void Awake()
     {
         currentSpore = Spores.None;
@@ -27,6 +36,7 @@ public class PlayerManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        Time.timeScale = 1.0f;
     }
 
     private void Update()
@@ -94,16 +104,18 @@ public class PlayerManager : MonoBehaviour
 
     public void DeathState()
     {
+        gameObject.transform.position = respawnPoint.position;
         Instantiate(ragdollPrefab, transform.position, transform.rotation);
-        gameObject.SetActive(false);
-        playerLocomotion.enabled = false;
-        inputManager.enabled = false;
-        animator.enabled = false;
-        this.enabled = false;
         
         
     }
-
+    public void HandlePause()
+    {
+        pauseWindow.SetActive(true);
+        Time.timeScale = 0.0f;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
 }
 
 public enum Spores

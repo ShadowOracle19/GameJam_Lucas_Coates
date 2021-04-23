@@ -9,7 +9,12 @@ public class SporeCloud : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (!other.gameObject.GetComponent<PlayerManager>().ContainsSpore(sporeProduced))
+            {
+                other.gameObject.GetComponent<AudioSource>().Play();
+            }
             other.gameObject.GetComponent<PlayerManager>().currentSpore = sporeProduced;
+            
         }
     }
 }

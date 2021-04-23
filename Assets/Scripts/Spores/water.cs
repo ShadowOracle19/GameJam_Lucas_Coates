@@ -16,18 +16,12 @@ public class water : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerManager player = other.gameObject.GetComponent<PlayerManager>();
-            if (player.ContainsSpore(Spores.Water))
+            if (!player.ContainsSpore(Spores.Water))
             {
                 //the player has water spore
-                Debug.Log("Player Has water Spores");
-            }
-            else
-            {
-                //the player doesn't have water spore
-                Debug.Log("Player does not have water Spores");
                 boxCollider.enabled = false;
-
             }
+            
 
 
         }

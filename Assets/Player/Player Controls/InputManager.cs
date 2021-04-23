@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
     AnimatorManager animatorManager;
+    PlayerManager playerManager;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -20,11 +21,13 @@ public class InputManager : MonoBehaviour
 
     public bool b_Input;
     public bool Jump_Input;
+    public bool pause_Input;
 
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        playerManager = GetComponent<PlayerManager>();
     }
 
     private void OnEnable()
@@ -39,6 +42,8 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Sprint.performed += i => b_Input = true;
             playerControls.PlayerActions.Sprint.canceled += i => b_Input = false;
             playerControls.PlayerActions.Jump.performed += i => Jump_Input = true;
+            playerControls.PlayerActions.Pause.performed += i => pause_Input = true;
+            playerControls.PlayerActions.Pause.canceled += i => pause_Input = false;
         }
 
         playerControls.Enable();
@@ -54,6 +59,7 @@ public class InputManager : MonoBehaviour
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpInput();
+        HandlePauseInput();
     }
 
     private void HandleMovementInput()
@@ -87,6 +93,15 @@ public class InputManager : MonoBehaviour
             Jump_Input = false;
             playerLocomotion.HandleJumping();
         }
+    }
+
+    private void HandlePauseInput()
+    {
+        if(pause_Input)
+        {
+            pause_Input = false;
+            playerManager.HandlePause();
+        }    
     }
 
 }
