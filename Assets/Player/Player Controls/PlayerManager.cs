@@ -104,10 +104,10 @@ public class PlayerManager : MonoBehaviour
 
     public void DeathState()
     {
-        gameObject.transform.position = respawnPoint.position;
+        
         Instantiate(ragdollPrefab, transform.position, transform.rotation);
-        
-        
+        gameObject.transform.position = respawnPoint.position;
+
     }
     public void HandlePause()
     {

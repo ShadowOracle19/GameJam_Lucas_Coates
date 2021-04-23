@@ -6,6 +6,10 @@ public class water_Hazard : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<PlayerManager>().DeathState();
+        if(other.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerManager>().DeathState();
+
+        }
     }
 }
